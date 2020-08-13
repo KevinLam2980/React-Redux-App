@@ -18,3 +18,17 @@ export const cocktailRecipes = () => (dispatch) => {
         dispatch({type:FETCH_COCTAILS_FAILURE, payload: err})
     })
 }
+
+export const searchCocktail = (searchValue) => (dispatch) => {
+    console.log('byebye')
+    dispatch({type: FETCHING_COCTAILS_START })
+    axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchValue}`)
+    .then(res => {
+        console.log(res.data.drinks)
+        dispatch({type:FETCH_COCTAILS_SUCCESS, payload: res.data.drinks})
+    })
+    .catch(err => {
+        console.log(err)
+        dispatch({type:FETCH_COCTAILS_FAILURE, payload: err})
+    })
+}

@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
-import { cocktailRecipes } from '../store/actions/cocktailActions'
+import { cocktailRecipes, searchCocktail } from '../store/actions/cocktailActions'
 import Styled from 'styled-components'
 
 const StyledSection = Styled.section`
@@ -54,13 +54,25 @@ li {
 `
 
 const CocktailList = props => {
-    useEffect(() => {
-        props.cocktailRecipes()
-    }, [])
-    
+    const [searchValue, setSearchValue] = useState('')
+        useEffect(() => {
+           props.cocktailRecipes()
+        }, [])
     return (
         <StyledSection>
-                <h2>Everyday is a good day for a margarita</h2>
+                <h2>Everyday is a good day for a cocktail</h2>
+                <form onSubmit={(e) => {
+                    e.preventDefault()
+                    props.searchCocktail(searchValue)}}>
+                <input
+                type='text'
+                placeholder='Search a drink'
+                value={searchValue}
+                onChange={evt => {setSearchValue(evt.target.value)}}
+                ></input>
+                
+                <button>submit</button>
+                </form>
                   {props.cocktails.length > 0 ? (<div>
                     {props.cocktails.map((ct) => (
                     (
@@ -69,14 +81,14 @@ const CocktailList = props => {
                             <h3>{ct.strDrink}</h3>
                             <p>Category: {ct.strCategory}</p>
                             <ol>
-                    {ct.strIngredient1 ? <li>{ct.strMeasure1} - {ct.strIngredient1}</li> : null}
-                    {ct.strIngredient2 ? <li>{ct.strMeasure2} - {ct.strIngredient2}</li> : null}
-                    {ct.strIngredient3 ? <li>{ct.strMeasure3} - {ct.strIngredient3}</li> : null}
-                    {ct.strIngredient4 ? <li>{ct.strMeasure4} - {ct.strIngredient4}</li> : null}
-                    {ct.strIngredient5 ? <li>{ct.strMeasure5} - {ct.strIngredient5}</li> : null}
-                    {ct.strIngredient6 ? <li>{ct.strMeasure6} - {ct.strIngredient6}</li> : null}
-                    {ct.strIngredient7 ? <li>{ct.strMeasure7} - {ct.strIngredient7}</li> : null}
-                    {ct.strIngredient8 ? <li>{ct.strMeasure8} - {ct.strIngredient8}</li> : null}
+                                {ct.strIngredient1 ? <li>{ct.strMeasure1} - {ct.strIngredient1}</li> : null}
+                                {ct.strIngredient2 ? <li>{ct.strMeasure2} - {ct.strIngredient2}</li> : null}
+                                {ct.strIngredient3 ? <li>{ct.strMeasure3} - {ct.strIngredient3}</li> : null}
+                                {ct.strIngredient4 ? <li>{ct.strMeasure4} - {ct.strIngredient4}</li> : null}
+                                {ct.strIngredient5 ? <li>{ct.strMeasure5} - {ct.strIngredient5}</li> : null}
+                                {ct.strIngredient6 ? <li>{ct.strMeasure6} - {ct.strIngredient6}</li> : null}
+                                {ct.strIngredient7 ? <li>{ct.strMeasure7} - {ct.strIngredient7}</li> : null}
+                                {ct.strIngredient8 ? <li>{ct.strMeasure8} - {ct.strIngredient8}</li> : null}
                             </ol>
                         </div>
                     )
@@ -92,4 +104,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {cocktailRecipes})(CocktailList)
+export default connect(mapStateToProps, {cocktailRecipes, searchCocktail})(CocktailList)

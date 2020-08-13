@@ -21,6 +21,7 @@ div {
     border-radius: 10px;
     margin: 20px 10px;
     background: rgba(0, 57, 171, 0.3);
+    box-shadow: 0 0 10px black;
 }
 img{
     width: 100%;
@@ -32,6 +33,24 @@ h2 {
     text-shadow: 3px 3px black;
     font-size: 2rem;
 }
+h3 {
+    margin: 1rem;
+    color: white;
+    text-shadow: 3px 3px black;
+    font-size: 1.4rem;
+}
+p {
+    margin-bottom: 1rem;
+    color: white;
+    text-shadow: 3px 3px black;
+    font-size: 1rem;
+}
+li {
+    color: white;
+    text-shadow: 3px 3px black;
+    font-size: 1rem;
+}
+
 `
 
 const CocktailList = props => {
@@ -47,8 +66,18 @@ const CocktailList = props => {
                     (
                         <div className='card' id={ct.idDrink}>
                             <img src={ct.strDrinkThumb}></img>
-                            <h2>{ct.strDrink}</h2>
-                            {/* <p>Category: {ct.strCategory}</p> */}
+                            <h3>{ct.strDrink}</h3>
+                            <p>Category: {ct.strCategory}</p>
+                            <ol>
+                    {ct.strIngredient1 ? <li>{ct.strMeasure1} - {ct.strIngredient1}</li> : null}
+                    {ct.strIngredient2 ? <li>{ct.strMeasure2} - {ct.strIngredient2}</li> : null}
+                    {ct.strIngredient3 ? <li>{ct.strMeasure3} - {ct.strIngredient3}</li> : null}
+                    {ct.strIngredient4 ? <li>{ct.strMeasure4} - {ct.strIngredient4}</li> : null}
+                    {ct.strIngredient5 ? <li>{ct.strMeasure5} - {ct.strIngredient5}</li> : null}
+                    {ct.strIngredient6 ? <li>{ct.strMeasure6} - {ct.strIngredient6}</li> : null}
+                    {ct.strIngredient7 ? <li>{ct.strMeasure7} - {ct.strIngredient7}</li> : null}
+                    {ct.strIngredient8 ? <li>{ct.strMeasure8} - {ct.strIngredient8}</li> : null}
+                            </ol>
                         </div>
                     )
                  ) )}

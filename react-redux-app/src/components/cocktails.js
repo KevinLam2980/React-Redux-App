@@ -8,6 +8,8 @@ import Styled from 'styled-components'
 const StyledHeader = Styled.section`
 background: rgba(0, 57, 171, 0.3);
 padding: 2rem;
+box-shadow: 0 0 10px black;
+border-bottom: 2px solid black;
 h1 {
     color: white;
     text-shadow: 3px 3px black;
@@ -33,7 +35,7 @@ const Cocktails = props => {
                 <h1>Cocktails for daez 🍹</h1>
             </StyledHeader>
             <StyledSection>
-                {props.isLoading ?   <Loader
+                {props.isLoading ?  <Loader
                                         type="ThreeDots"
                                         color="#fc88a8"
                                         height={300}

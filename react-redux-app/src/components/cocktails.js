@@ -1,7 +1,27 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {cocktailRecipes} from '../store/actions/cocktailActions'
+import CocktailList from './cocktailList'
+import Loader from 'react-loader-spinner'
+import Styled from 'styled-components'
 
+const StyledHeader = Styled.section`
+background: rgba(0, 57, 171, 0.3);
+padding: 2rem;
+h1 {
+    color: white;
+    text-shadow: 3px 3px black;
+    font-size: 3rem;
+}
+`
+const StyledSection = Styled.section`
+display: flex;
+border: 2px solid black;
+border-radius: 10px;
+margin: 2rem auto;
+max-width: 1200px;
+box-shadow: 0 0 10px black;
+`
 const Cocktails = props => {
     useEffect(() => {
         props.cocktailRecipes()
@@ -9,18 +29,22 @@ const Cocktails = props => {
 
     return (
         <div>
-            <section>
+            <StyledHeader>
                 <h1>Cocktails for daez 🍹</h1>
-            </section>
-            <section>
-                {props.isLoading ? <h2>I be loading still tho</h2> : null}
+            </StyledHeader>
+            <StyledSection>
+                {props.isLoading ?   <Loader
+                                        type="ThreeDots"
+                                        color="#fc88a8"
+                                        height={300}
+                                        width={300}
+                                        timeout={3000} //3 secs
+
+                                    /> : null}
                 {props.errors ? <h2>There be errors doe</h2> : null}
-                {props.cocktails.length > 0 ? (<div>
-                    {props.cocktails.map((ct) => (
-                    (<p>{ct.strDrink}</p>)
-                 ) )}
-                </div>) : null}
-            </section>
+                <CocktailList />
+                
+            </StyledSection>
         </div>
     )
 }

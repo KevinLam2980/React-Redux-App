@@ -3,6 +3,7 @@ import { reducer } from '..'
 
 export const FETCHING_COCTAILS_START = 'FETCHING_COCTAILS_START'
 export const FETCH_COCTAILS_SUCCESS = 'FETCH_COCTAILS_SUCCESS'
+export const FETCH_COCTAILS_FAILURE = 'FETCH_COCTAILS_FAILURE'
 
 export const cocktailRecipes = () => (dispatch) => {
     console.log('hello')
@@ -14,5 +15,6 @@ export const cocktailRecipes = () => (dispatch) => {
     })
     .catch(err => {
         console.log(err)
+        dispatch({type:FETCH_COCTAILS_FAILURE, payload: err})
     })
 }

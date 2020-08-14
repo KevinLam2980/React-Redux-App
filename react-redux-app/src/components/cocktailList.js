@@ -60,7 +60,7 @@ const CocktailList = props => {
         }, [])
     return (
         <StyledSection>
-                <h2>Everyday is a good day for a cocktail</h2>
+                <h2>Feels like a {searchValue ? searchValue : 'drink'} kind of day</h2>
                 <form onSubmit={(e) => {
                     e.preventDefault()
                     props.searchCocktail(searchValue)}}>
@@ -73,7 +73,8 @@ const CocktailList = props => {
                 
                 <button>submit</button>
                 </form>
-                  {props.cocktails.length > 0 ? (<div>
+                    {console.log(props.cocktails)}
+                  {props.cocktails !== null ? (<div>
                     {props.cocktails.map((ct) => (
                     (
                         <div className='card' id={ct.idDrink}>
@@ -94,13 +95,15 @@ const CocktailList = props => {
                     )
                  ) )}
                 </div>) : null}
+                {props.cocktails === null ? <h3>No results found for "{searchValue}"</h3> : null }
         </StyledSection>
     )
 }
 
 const mapStateToProps = state => {
     return {
-        cocktails: state.cocktails
+        cocktails: state.cocktails,
+        erros: state.errors
     }
 }
 

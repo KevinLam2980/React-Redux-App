@@ -18,11 +18,15 @@ h1 {
 `
 const StyledSection = Styled.section`
 display: flex;
+flex-direction: column;
 border: 2px solid black;
 border-radius: 10px;
 margin: 2rem auto;
 max-width: 1200px;
 box-shadow: 0 0 10px black;
+#{
+    margin: 0 auto;
+}
 `
 const Cocktails = props => {
     useEffect(() => {
@@ -35,7 +39,10 @@ const Cocktails = props => {
                 <h1>Cocktails for daez 🍹</h1>
             </StyledHeader>
             <StyledSection>
+                {props.errors ? <h2>There be errors doe - {props.errors}</h2> : null}
+                <CocktailList />
                 {props.isLoading ?  <Loader
+                                        id='customLoader'
                                         type="ThreeDots"
                                         color="#fc88a8"
                                         height={300}
@@ -43,8 +50,6 @@ const Cocktails = props => {
                                         timeout={3000} //3 secs
 
                                     /> : null}
-                {props.errors ? <h2>There be errors doe</h2> : null}
-                <CocktailList />
                 
             </StyledSection>
         </div>

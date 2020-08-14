@@ -8,7 +8,7 @@ export const FETCH_COCTAILS_FAILURE = 'FETCH_COCTAILS_FAILURE'
 export const cocktailRecipes = () => (dispatch) => {
     console.log('hello')
     dispatch({type: FETCHING_COCTAILS_START })
-    axios.get('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita')
+    axios.get('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
     .then(res => {
         console.log(res.data.drinks)
         dispatch({type:FETCH_COCTAILS_SUCCESS, payload: res.data.drinks})

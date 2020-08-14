@@ -1,7 +1,7 @@
 import {FETCHING_COCTAILS_START, FETCH_COCTAILS_SUCCESS, FETCH_COCTAILS_FAILURE} from '../actions/cocktailActions'
 
 const initialState = {
-    cocktails:  [],
+    cocktails: [],
     loading: false,
     errors: ''
 }
@@ -24,7 +24,8 @@ export const cocktailReducer = (state = initialState, action) => {
             return {
               ...state,
               isLoading: false,
-              errors: action.payload
+              errors: action.payload,
+              cocktails: []
             };
       default:
         return state;

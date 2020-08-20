@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import {connect} from 'react-redux'
 import { cocktailRecipes, searchCocktail } from '../store/actions/cocktailActions'
 import Styled from 'styled-components'
+import { useHistory } from 'react-router-dom'
 
 const StyledSection = Styled.section`
 /* display: flex; */
@@ -12,20 +13,25 @@ div {
     justify-content: space-around;
 }
 .card {
-    width: 30%;
+    &:hover {
+        transform: scale(1.1);
+        transition: 0.5s ease-in;
+    }
+    width: 350px;
     min-width: 300px;
     display: flex;
     flex-direction: column;
     padding: 2rem;
     border: 2px solid black;
     border-radius: 10px;
-    margin: 20px 10px;
+    margin: 20px 0;
     background: rgba(0, 57, 171, 0.3);
     box-shadow: 0 0 10px black;
 }
 img{
     width: 100%;
-    border-radius: 10px
+    border-radius: 10px;
+    box-shadow: 0 0 10px black;
 }
 h2 {
     margin: 3rem;
@@ -50,6 +56,27 @@ li {
     text-shadow: 3px 3px black;
     font-size: 1rem;
 }
+input {
+    &:focus{
+        outline: none;
+        transform: scale(1.1);
+    } 
+    &:hover {
+        transition: 0.5s;
+        transform: scale(1.1);
+    }
+    padding: .75rem;
+    text-align: center;
+    width: 75%;
+    box-shadow: 0 0 10px black;
+    color: white;
+    box-shadow: 0 0 10px black;
+    border: none;
+    background: rgba(0, 57, 171, 0.3);
+    border-radius: 10px;
+    border: 2px solid black;
+    margin-bottom: 1rem;
+}
 
 `
 
@@ -58,6 +85,7 @@ const CocktailList = props => {
         useEffect(() => {
            props.cocktailRecipes()
         }, [])
+    const History = useHistory()
     return (
         <StyledSection>
                 <h2>Feels like a {searchValue ? searchValue : 'drink'} kind of day</h2>
@@ -71,13 +99,16 @@ const CocktailList = props => {
                 onChange={evt => {setSearchValue(evt.target.value)}}
                 ></input>
                 
-                <button>submit</button>
+                {/* <button>submit</button> */}
                 </form>
                     {console.log(props.cocktails)}
                   {props.cocktails !== null ? (<div>
                     {props.cocktails.map((ct) => (
-                    (
-                        <div className='card' id={ct.idDrink}>
+                    ( 
+                        <div className='card' id={ct.idDrink} onClick={(e) => {
+                            e.preventDefault()
+                            History.push(`/drink/${ct.idDrink}`)
+                        }}>
                             <img src={ct.strDrinkThumb}></img>
                             <h3>{ct.strDrink}</h3>
                             <p>Category: {ct.strCategory}</p>
@@ -91,7 +122,7 @@ const CocktailList = props => {
                                 {ct.strIngredient7 ? <li>{ct.strMeasure7} - {ct.strIngredient7}</li> : null}
                                 {ct.strIngredient8 ? <li>{ct.strMeasure8} - {ct.strIngredient8}</li> : null}
                             </ol>
-                        </div>
+                        </div> 
                     )
                  ) )}
                 </div>) : null}
